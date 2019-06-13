@@ -41,6 +41,8 @@ edit_config() {
       if [ -z $input ]; then
         error "请重新输入"
         edit_config $1
+      else
+        server=$input
       fi
     ;;
     server_port)
