@@ -72,7 +72,7 @@ On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
 success () {
-  echo "${Green} $1 ${Color_Off}";
+  echo "${Green} $1 ${Color_Off}"
 }
 
 error () {
