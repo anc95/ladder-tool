@@ -19,6 +19,7 @@ local_port="1080"
 timeout=300
 method="aes-256-cfb"
 fast_open=false
+password="password"
 
 shadowsocks_config_file=/etc/shadowsocks.json
 shadowcocks_service_file=/etc/systemd/system/shadowsocks.service
@@ -79,6 +80,15 @@ edit_config() {
         timeout=$input
       fi
     ;;
+    password)
+      info "请输入密码(默认:password):/c"
+      success "1)"
+      read input
+
+      if [ ! -z $input ]; then
+        password=$input
+      fi
+    ;;
     method)
       info "请选择加密方式(默认:aes-256-cfb):/c"
       success "1)"
@@ -99,6 +109,7 @@ config_shadowsocks() {
   edit_config "local_port"
   edit_config "timeout"
   edit_config "method"
+  edit_config "password"
   write_config
 }
 
