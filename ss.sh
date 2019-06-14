@@ -137,6 +137,6 @@ init_service() {
   systemctl start shadowsocks.service
 }
 
-install_pip
+install_shadowsocks
 config_shadowsocks
 init_service
