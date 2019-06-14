@@ -114,8 +114,8 @@ config_shadowsocks() {
 }
 
 write_config() {
-  keys=("server" "server_port" "local_address" "local_port" "timeout" "method")
-  values=(${server} ${server_port} ${local_address} ${local_port} ${timeout} ${method})
+  keys=("server" "server_port" "local_address" "local_port" "timeout" "method", "password")
+  values=(${server} ${server_port} ${local_address} ${local_port} ${timeout} ${method}, ${password})
 
   echo "{" | sudo tee $shadowsocks_config_file
 
