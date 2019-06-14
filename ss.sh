@@ -26,11 +26,10 @@ shadowcocks_service_file=/etc/systemd/system/shadowsocks.service
 
 
 install_shadowsocks() {
-  if command -v pip &>/dev/null; then
-    info "开始下载shadowsocks"
-    ldnf install ibsodium python34-pip
-    pip3 install  git+https://github.com/shadowsocks/shadowsocks.git@master
-  fi
+  info "开始下载shadowsocks"
+  info "开始下载shadowsocks"
+  yum install python-setuptools && easy_install pip
+  pip install shadowsocks
 }
 
 edit_config() {
@@ -101,6 +100,14 @@ edit_config() {
   esac
 }
 
+firewall_open() {
+  port=$1
+  systemctl start firewalld.service
+  firewall-cmd --permanent --zone=public --add-port=$port/tcp
+  firewall-cmd --reload
+  systemctl restart firewalld.service
+}
+
 config_shadowsocks() {
   sudo touch $shadowsocks_config_file
   edit_config "server"
@@ -111,6 +118,7 @@ config_shadowsocks() {
   edit_config "method"
   edit_config "password"
   write_config
+  firewall_open $server_port
 }
 
 write_config() {
